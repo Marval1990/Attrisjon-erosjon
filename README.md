@@ -1,68 +1,80 @@
 # Attrisjon og erosjon
 
-Chairside dokumentasjonsverktøy for norske tannleger som skal dokumentere
+Chairside journalstøtte for norske tannleger som skal dokumentere
 patologisk tap av tannsubstans (attrisjon/erosjon) opp mot HELFO
 innslagspunkt 9.
+
+Nettversjon: https://marval1990.github.io/Attrisjon-erosjon/
 
 ## Bruk
 
 Åpne `index.html`. Det er alt. Én fil, ingen avhengigheter, ingen CDN,
-ingen byggesteg — verktøyet fungerer offline ved å dobbeltklikke filen.
-Optimalisert for desktop, 1280 px og bredere.
+ingen byggesteg. Verktøyet fungerer offline ved å dobbeltklikke filen.
+
+Arbeidsflyten er: kryss av det som passer, skriv resten, kopier
+journalteksten. Hurtigvalgene blir til ferdige journalsetninger, og
+journalteksten nederst oppdateres fortløpende.
 
 ## Innhold
 
-1. **Grunndata** — alder (obligatorisk), dato, pasientnummer, behandler
-2. **TWI-registrering** — odontogram 18–11 / 21–28 / 48–41 / 31–38 etter
-   Smith & Knight Tooth Wear Index. Fire flater per tann, klikk for å øke
-   score 0–4, Shift-klikk for å gå bakover. Tenner kan markeres som
-   manglende og utelates da fra beregningen. Bryter for forenklet modus
-   med kun okklusal/incisal flate.
-3. **BEWE** — valgfri, kollapsbar. Seks sekstanter, sum 0–18 med risikonivå.
-4. **Okklusjon og vertikal dimensjon**
-5. **Etiologi og aktivitet** — attrisjon, erosjon, abrasjon
-6. **Alvorlighetsvurdering mot innslagspunkt 9** — sjekkliste på sju punkter
-   der hvert punkt krever både hake og fritekst. Gir dokumentasjonsstatus
-   RØD / GUL / GRØNN.
-7. **Behandlingsvalg** — materialvalg, obligatorisk journalføring ved
-   kroneterapi, oppbyggingsplan og oppfølging
-8. **Generert journaltekst** — sammenhengende norsk journaltekst som ren
-   tekst, klar til å limes inn i Opus
+1. **Funn og vurdering**
+   - Alder, behandler og årsak
+   - Anamnese og etiologiske faktorer (hurtigvalg)
+   - Kliniske funn og symptomer (hurtigvalg + fritekst)
+   - **Smith & Knight · tannkart** (valgfritt, kollapsbart): odontogram
+     18–28 / 48–38 med fire flater per tann, score 0–4, flervalg for
+     mange tenner samtidig, manglende tenner, angre
+   - Samlet vurdering delt i funksjon, estetikk og tannhelse (hurtigvalg),
+     skadeomfang i forhold til alder, samlet alvorlighet og fritekst
+   - Basisdokumentasjon (foto, røntgen, skann/modeller) og bekreftelse på
+     at alvorlighet er dokumentert før behandlingsstart
+2. **Behandlingsplan**
+   - Tannkart for planlagte tenner, med hurtigvalg for kjeve, front og alle
+   - Materialvalg (kompositt / kroner) med obligatorisk begrunnelse ved kroner
+   - Tiltak som hurtigvalg (bittheving i mm, Dahls prinsipp, støttekroner,
+     etappevis behandling, okklusjonskontroll, bittskinne) + fritekst
+   - Sykdomsaktivitet og langtidsprognose
+   - Forebygging og oppfølging som hurtigvalg + kontrollintervall + fritekst
+   - Andre behandlingssituasjoner (erstatning av tapt tann, slitasje av
+     protetisk materiale)
+3. **Journaltekst**
+   - Ren tekst klar til å limes inn i journalsystemet. Tomme felt utelates.
+   - Format: «Med overskrifter» eller «Kompakt» (én linje per avsnitt).
+     Topptekst med dato, pasientnummer og behandler kan slås av.
+   - **Dokumentasjonssjekk**: viser om punktene rundskrivet spør etter er
+     fylt ut (alder, årsak, funn, funksjon/estetikk, skadeomfang mot alder,
+     dokumentasjon før oppstart, plan med tenner og materiale,
+     kronebegrunnelse ved kroner, aktivitet/prognose, oppfølging). Klikk på
+     et punkt for å hoppe til feltet. Dette er en utfyllingskontroll, ikke
+     en vurdering av stønadsrett.
+   - Kopier, last ned som tekstfil, vis rapport eller skriv ut.
 
-Nederst: resultatpanel med begrunnelseslister, kontrollpunkter, «Nullstill»
-og «Skriv ut rapport». Sticky bunnlinje viser løpende dokumentasjonsstatus
-og antall tenner med dentineksponering.
+Sticky bunnlinje viser dokumentasjonssjekken og har en egen «Kopier
+journaltekst»-knapp, slik at teksten kan kopieres uansett hvor på siden
+du er.
 
 ## Mobil
 
-Desktop-oppsettet er uendret. Under 768px legges mobiltilpasning på
-progressivt: forenklet modus (kun okklusal/incisal) er default, kjevene
-vises som separate blokker med horisontal scroll, snap og scroll-indikator,
-tannnummer og flater har minst 44x44px trykkflate, og langtrykk i 500 ms går
-bakover i scoreskalaen (Shift-klikk beholdes på desktop). Bunnlinjen
-komprimeres til dokumentasjonsstatus og «Gå til resultat», og respekterer
-safe-area-inset-bottom. Nettbrett i portrett (768–1023px med berøringsskjerm)
-får trykkvennlig odontogram uten å endre desktop-layouten.
+Under 800 px legges seksjonene under hverandre, hurtigvalgene får større
+trykkflate, og tannkartet vises kjeve for kjeve.
 
 ## Personvern
 
 Ingen data lagres eller sendes. Ingenting skrives til nettleserens lagring,
-og verktøyet gjør ingen nettverkskall. Bruk kun pasientnummer — aldri navn
+og verktøyet gjør ingen nettverkskall. Bruk kun pasientnummer, aldri navn
 eller fødselsnummer.
 
 ## Design
 
-CSS-en er kopiert fra [perioberegning](https://github.com/Marval1990/perioberegning)
-slik at de to verktøyene framstår som samme produkt: samme CSS-variabler
-(primærfarge `#1E6E5B`, alvorlighetsskalaen `--sev1` til `--sev4`, radius,
-fontstack), samme header, nummererte seksjoner med ingress, og de samme
-klassenavnene på kort, segmentknapper, skjemakontroller, resultatpanel og
-print-CSS.
+CSS-en bygger på [perioberegning](https://github.com/Marval1990/perioberegning)
+slik at de to verktøyene framstår som samme produkt: samme fargevariabler
+(primærfarge `#1e6e5b`, alvorlighetsskalaen `--s1` til `--s4`), radius,
+fontstack, header, nummererte seksjoner og print-CSS.
 
 ## Avgrensning
 
 Verktøyet er dokumentasjonsstøtte, ikke en garanti for stønadsrett. Det
 inneholder ingen takster, refusjonsbeløp eller pasientbetaling. HELFO
-forhåndsgodkjenner ikke kasus — vurderingen gjøres etterskuddsvis, og
-bevisbyrden ligger hos behandlende tannlege. Dokumentasjonsstatusen som
-vises er verktøyets kontroll av at feltene er utfylt, ikke en godkjenning.
+forhåndsgodkjenner ikke kasus; vurderingen gjøres etterskuddsvis, og
+bevisbyrden ligger hos behandlende tannlege. Dokumentasjonssjekken er
+verktøyets kontroll av at feltene er utfylt, ikke en godkjenning.
