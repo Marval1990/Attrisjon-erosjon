@@ -281,11 +281,23 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
 .edit-state{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:10px;padding:10px 12px;border:1px solid #ead6aa;background:var(--warn-bg);border-radius:9px;font-size:12.5px;color:var(--warn)}
 .edit-state .btn{min-height:36px;padding:6px 12px;font-size:12px}
 .journal:focus-visible{background:#fff}
+.tooth-layout{grid-template-columns:minmax(0,1fr) 280px;gap:20px}
+.tooth-layout>.chart-col{grid-column:1/-1}
+.tooth-layout>.editor{grid-column:1}
+.grade-guide{grid-column:2;border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:16px;font-size:12.5px}
+.grade-guide h4{margin:0 0 4px;font-size:14px}
+.grade-guide .hint{margin:0 0 6px}
+.grade{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);align-items:start}
+.grade .key-score{width:28px;height:28px;font-size:13px}
+.grade b{display:block;font-size:12.5px;color:var(--ink)}
+.grade span:not(.key-score){display:block;color:var(--ink2);line-height:1.4;margin-top:1px}
+.grade small{display:block;color:var(--muted);font-size:11.5px;line-height:1.4;margin-top:3px}
+.grade+.hint{border-top:1px solid var(--line);padding-top:10px;margin-top:0}
 .sticky-status{margin-top:8px;gap:12px}
 .sticky-status .status-text{display:flex;flex-direction:column;gap:1px;min-width:0}
 .sticky-status .btn{margin-left:auto;min-height:40px;padding:8px 14px}
 .sticky-status .btn.secondary{margin-left:0}
-@media(max-width:1000px){.journal-layout{grid-template-columns:1fr}.journal-side{position:static}}
+@media(max-width:1000px){.journal-layout{grid-template-columns:1fr}.journal-side{position:static}.tooth-layout{grid-template-columns:1fr}.tooth-layout>.editor,.grade-guide{grid-column:1}}
 @media(max-width:800px){.assess-grid,.measure-row{grid-template-columns:1fr}.sticky-status{padding:8px 11px}.sticky-status .btn.secondary{display:none}.sticky-status .status-text span{display:block;font-size:11px}}
 </style>
 </head>
@@ -381,18 +393,10 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
           </div>
         </div>
         <div class="tooth-layout">
-          <div>
+          <div class="chart-col">
             <div class="chart-orientation"><span>Pasientens høyre side</span><span>Pasientens venstre side</span></div><div class="archblock upper"><div class="archlabel">Overkjeve</div><div id="upperTeeth" class="toothgrid"></div></div>
             <div class="archblock lower"><div class="archlabel">Underkjeve</div><div id="lowerTeeth" class="toothgrid"></div></div>
-            <div class="score-key" aria-label="Fargeforklaring for TWI-score"><span>Høyeste score:</span><span class="key-score" data-level="0">0</span><span class="key-score" data-level="1">1</span><span class="key-score" data-level="2">2</span><span class="key-score" data-level="3">3</span><span class="key-score" data-level="4">4</span><span>– = ikke registrert · tannformene er skjematiske</span></div><details class="index-help"><summary>TWI 0–4 · hva betyr gradene?</summary>
-<p class="helper">Smith &amp; Knight: bruk kriteriet for flaten du registrerer. «–» betyr ikke registrert.</p>
-<div class="table-scroll"><table class="reference-table"><thead><tr><th>Grad</th><th>Bukkal, lingual/palatinal og okklusal</th><th>Incisal</th><th>Cervikal</th></tr></thead><tbody>
-<tr><th>0</th><td>Ingen tap av emaljens overflatekarakteristika.</td><td>Som øvrige flater.</td><td>Uendret kontur.</td></tr>
-<tr><th>1</th><td>Tap av emaljens overflatekarakteristika.</td><td>Som øvrige flater.</td><td>Minimal konturendring.</td></tr>
-<tr><th>2</th><td>Dentin eksponert på mindre enn ⅓ av flaten.</td><td>Emaljetap med blottlagt dentin.</td><td>Defekt under 1 mm dyp.</td></tr>
-<tr><th>3</th><td>Dentin eksponert på mer enn ⅓ av flaten.</td><td>Emaljetap og betydelig dentintap, uten eksponert pulpa eller sekundærdentin.</td><td>Defekt 1–2 mm dyp.</td></tr>
-<tr><th>4</th><td>Fullstendig emaljetap, eller eksponert pulpa eller sekundærdentin.</td><td>Eksponert pulpa eller sekundærdentin.</td><td>Defekt over 2 mm, eller eksponert pulpa eller sekundærdentin.</td></tr>
-</tbody></table></div><p class="helper">Indeksen beskriver slitasje; årsak og alvorlighet vurderes klinisk. <a href="https://doi.org/10.1038/sj.bdj.4805394" target="_blank" rel="noopener noreferrer">Smith &amp; Knight (1984)</a>.</p></details>
+            <div class="score-key" aria-label="Fargeforklaring for TWI-score"><span>Høyeste score:</span><span class="key-score" data-level="0">0</span><span class="key-score" data-level="1">1</span><span class="key-score" data-level="2">2</span><span class="key-score" data-level="3">3</span><span class="key-score" data-level="4">4</span><span>– = ikke registrert · tannformene er skjematiske</span></div>
           </div>
           <div class="editor" id="singleEditor" aria-live="polite">
             <div class="editorhead"><span>Valgt tann</span><strong id="selectedLabel">16</strong><button id="missingBtn" class="missingbtn" type="button" aria-pressed="false">Mangler</button></div>
@@ -421,6 +425,16 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
               </div>
             </div>
           </div>
+          <aside class="grade-guide" aria-label="Forklaring av TWI-gradene">
+            <h4>TWI-gradene · Smith &amp; Knight</h4>
+            <p class="hint">Fem grader, 0–4. Bruk kriteriet for flaten du registrerer. Score 2 og høyere betyr eksponert dentin.</p>
+            <div class="grade"><span class="key-score" data-level="0">0</span><div><b>Ingen slitasje</b><span>Emaljens overflatekarakteristika er bevart.</span><small>Cervikalt: uendret kontur.</small></div></div>
+            <div class="grade"><span class="key-score" data-level="1">1</span><div><b>Emaljeslitasje</b><span>Tap av emaljens overflatekarakteristika, uten synlig dentin.</span><small>Cervikalt: minimal konturendring.</small></div></div>
+            <div class="grade"><span class="key-score" data-level="2">2</span><div><b>Dentin eksponert, under ⅓</b><span>Dentin synlig på mindre enn ⅓ av flaten.</span><small>Incisalt: emaljetap med blottlagt dentin. Cervikalt: defekt under 1 mm.</small></div></div>
+            <div class="grade"><span class="key-score" data-level="3">3</span><div><b>Dentin eksponert, over ⅓</b><span>Dentin synlig på mer enn ⅓ av flaten.</span><small>Incisalt: betydelig dentintap uten eksponert pulpa. Cervikalt: defekt 1–2 mm.</small></div></div>
+            <div class="grade"><span class="key-score" data-level="4">4</span><div><b>Fullstendig emaljetap eller pulpa</b><span>Fullstendig emaljetap, eller eksponert pulpa eller sekundærdentin.</span><small>Cervikalt: defekt over 2 mm.</small></div></div>
+            <p class="hint">Indeksen beskriver slitasje; årsak og alvorlighet vurderes klinisk. <a href="https://doi.org/10.1038/sj.bdj.4805394" target="_blank" rel="noopener noreferrer">Smith &amp; Knight (1984)</a>.</p>
+          </aside>
         </div>
         <div class="stats">
           <div class="stat"><b id="statAffected">0</b><span>affiserte flater</span></div>
