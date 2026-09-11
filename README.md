@@ -30,7 +30,9 @@ journalteksten nederst oppdateres fortløpende.
      at alvorlighet er dokumentert før behandlingsstart
 2. **Behandlingsplan**
    - Tannkart for planlagte tenner, med hurtigvalg for kjeve, front og alle
-   - Materialvalg (kompositt / kroner) med obligatorisk begrunnelse ved kroner
+   - Materialvalg (kompositt / kroner / kroner kan vurderes på sikt). Kroner er
+     unntaket og får egne hurtigvalg for begrunnelse (rotfylt og svekket tann,
+     for lite gjenværende tannsubstans, gjentatte chippinger av kompositt, osv.)
    - Tiltak som hurtigvalg (bittheving i mm, Dahls prinsipp, støttekroner,
      etappevis behandling, okklusjonskontroll, bittskinne) + fritekst
    - Sykdomsaktivitet og langtidsprognose
@@ -39,6 +41,8 @@ journalteksten nederst oppdateres fortløpende.
      protetisk materiale)
 3. **Journaltekst**
    - Ren tekst klar til å limes inn i journalsystemet. Tomme felt utelates.
+     Teksten kan redigeres direkte i feltet; da slutter skjemaet å overskrive
+     den, og «Generer på nytt fra skjemaet» henter ny tekst ved behov.
    - Format: «Med overskrifter» eller «Kompakt» (én linje per avsnitt).
      Topptekst med dato, pasientnummer og behandler kan slås av.
    - **Dokumentasjonssjekk**: viser om punktene rundskrivet spør etter er
