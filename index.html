@@ -249,6 +249,44 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
 .report{font:13px/1.6 var(--ui);color:var(--ink);overflow-wrap:anywhere}.report-kicker{color:var(--accent);text-transform:uppercase;font-size:10px;letter-spacing:.12em;margin:0 0 6px}.report h1{font:600 28px var(--display);padding-bottom:12px;border-bottom:2px solid var(--accent)}.report-meta{display:flex;gap:8px 24px;flex-wrap:wrap;margin-top:14px;color:var(--ink2);font-size:12px}.report h2{font:700 12px var(--ui);text-transform:uppercase;letter-spacing:.04em;margin:20px 0 7px;padding-bottom:5px;border-bottom:1px solid var(--line);break-after:avoid}.report section p{margin:0;white-space:normal;orphans:3;widows:3}.report header{break-inside:avoid}.journal{min-height:390px}
 @media(max-width:600px){.report-preview{padding:16px}.report-meta{display:grid;gap:5px}.intro{padding:13px}#planChart{padding:8px}}
 @media print{.skip{display:none!important}#printReport .report{font-size:11px}#printReport .report h1{font-size:24px}#printReport .report h2{font-size:11px;margin-top:15px}#printReport .report-meta{font-size:10px}#printReport .report section{break-inside:auto}}
+
+/* Hurtigvalg, dokumentasjonssjekk og journalvisning */
+.choice span::first-letter{text-transform:uppercase}
+.sublabel{font-size:12px;font-weight:700;color:var(--ink2);margin:12px 0 7px}
+.group>.sublabel:first-child,.subgroup:first-child>.sublabel{margin-top:0}
+.subgroup{margin-top:12px}
+.hint{font-size:12px;color:var(--muted);margin:6px 0 0}
+.assess-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px}
+.measure-row{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:13px;align-items:end}
+.journal-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+.journal-side{border:1px solid var(--line);border-radius:12px;background:var(--soft);padding:14px;position:sticky;top:10px}
+.journal-side h3{margin:0 0 4px;font-size:14px}
+.journal-side .hint{margin:0 0 10px}
+.checklist{list-style:none;margin:0;padding:0}
+.checklist li{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-top:1px solid var(--line);font-size:12.5px}
+.checklist li:first-child{border-top:0;padding-top:0}
+.checklist .mark{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--mono);border:1px solid var(--line2);color:var(--muted);background:#fff;margin-top:1px}
+.checklist li.ok .mark{background:var(--ok-bg);border-color:#aed5bf;color:var(--ok)}
+.checklist button{background:transparent;border:0;padding:0;text-align:left;color:var(--ink2);cursor:pointer;font-size:12.5px;line-height:1.4;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.checklist button:hover{text-decoration-color:currentColor;color:var(--accent2)}
+.checklist li.ok button{color:var(--ink2)}
+.check-progress{display:flex;align-items:center;gap:10px;margin:10px 0 12px}
+.check-progress .bar{flex:1;height:7px;border-radius:99px;background:#e2e9e4;overflow:hidden}
+.check-progress .bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .2s}
+.check-progress b{font:700 12px var(--mono);color:var(--accent2)}
+.format-row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:0 0 12px}
+.format-row .choices{gap:6px}
+.format-row .choice span{padding:7px 12px;font-size:12.5px}
+.format-row .check{border:0;padding:0;font-size:12.5px}
+.edit-state{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:10px;padding:10px 12px;border:1px solid #ead6aa;background:var(--warn-bg);border-radius:9px;font-size:12.5px;color:var(--warn)}
+.edit-state .btn{min-height:36px;padding:6px 12px;font-size:12px}
+.journal:focus-visible{background:#fff}
+.sticky-status{margin-top:8px;gap:12px}
+.sticky-status .status-text{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sticky-status .btn{margin-left:auto;min-height:40px;padding:8px 14px}
+.sticky-status .btn.secondary{margin-left:0}
+@media(max-width:1000px){.journal-layout{grid-template-columns:1fr}.journal-side{position:static}}
+@media(max-width:800px){.assess-grid,.measure-row{grid-template-columns:1fr}.sticky-status{padding:8px 11px}.sticky-status .btn.secondary{display:none}.sticky-status .status-text span{display:block;font-size:11px}}
 </style>
 </head>
 <body>
@@ -268,7 +306,7 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
 
 <main id="main">
   <noscript><p class="note">Aktiver JavaScript for å registrere funn og lage journalutkast.</p></noscript>
-  <div class="intro"><p><strong>Formålet er dokumentasjon</strong></p></div>
+  <div class="intro"><p><strong>Kryss av det som passer, skriv resten.</strong> Hurtigvalgene blir til ferdige journalsetninger. Journalteksten nederst oppdateres fortløpende og kan kopieres rett inn i journalen.</p><span class="privacy">Ingenting lagres eller sendes.</span></div>
   <nav class="rulebar" aria-label="Gå til del"><a href="#clinical">1. Funn og vurdering</a><a href="#treatment">2. Behandlingsplan</a><a href="#journalSection">3. Journaltekst</a></nav>
   <details class="rules"><summary>Hva må begrunnes under innslagspunkt 9?</summary>
     <ul><li>Alvorlig slitasje som rammer både funksjon og estetikk, og gir vesentlig svekket tannhelse. Vurder skaden i lys av alder, og dokumenter før oppstart.</li>
@@ -279,18 +317,58 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
     <p><a href="https://www.helfo.no/regelverk/konserverende-behandling-eller-kroneterapi" target="_blank" rel="noopener noreferrer">Helfo: behandlingsvalg</a> · <a href="https://www.helfo.no/tannlege/Oppgjer-for-tannlege/slik-dokumenterer-tannlege-refusjonskrav" target="_blank" rel="noopener noreferrer">Dokumentasjon av refusjonskrav</a></p>
     <p>Feltene gir skrivestøtte til dokumentasjonen. TWI er valgfritt; rundskrivets punkt 9 angir ingen TWI-grense som automatisk gir stønad. Stønad følger refusjonstakster. Kontroller regler og takster for behandlingstidspunktet.</p>
   </details>
+
   <details class="card" id="clinical" open>
-    <summary><span class="step">1</span><span><span class="sumtitle">Funn og vurdering</span><span class="sumsub">Kliniske funn, TWI og samlet vurdering</span></span></summary>
+    <summary><span class="step">1</span><span><span class="sumtitle">Funn og vurdering</span><span class="sumsub">Anamnese, kliniske funn, TWI og samlet vurdering</span></span></summary>
     <div class="body">
       <div class="grid3">
-        <div class="field"><label for="age">Alder</label><input id="age" type="number" min="1" max="120" inputmode="numeric" placeholder="År"></div>
+        <div class="field"><label for="age">Alder <span class="req">*</span></label><input id="age" type="number" min="1" max="120" inputmode="numeric" placeholder="År"></div>
         <div class="field"><label for="clinician">Behandler</label><input id="clinician" type="text" autocomplete="off" placeholder="Navn eller initialer"></div>
-        <div class="field"><label for="cause">Årsak</label><select id="cause"><option value="">Velg</option><option>Attrisjon</option><option>Erosjon</option><option>Attrisjon og erosjon</option><option>Patologisk slitasje av protetisk materiale</option><option>Uavklart</option><option>Annen hovedårsak</option></select></div>
+        <div class="field"><label for="cause">Årsak <span class="req">*</span></label><select id="cause"><option value="">Velg</option><option>Attrisjon</option><option>Erosjon</option><option>Attrisjon og erosjon</option><option>Patologisk slitasje av protetisk materiale</option><option>Uavklart</option><option>Annen hovedårsak</option></select></div>
       </div>
-      <div class="grid2 group">
-        <div class="field"><label for="findings">Kliniske funn</label><textarea id="findings" placeholder="Funn som støtter årsaken, symptomer og øvrige relevante observasjoner. TWI-funn hentes fra tannkartet."></textarea></div>
-        <div class="field"><label for="assessment">Samlet vurdering</label><textarea id="assessment" placeholder="Betydning for funksjon og estetikk, påvirkning på tannhelse og skadeomfang sett i forhold til alder."></textarea><small>Funksjon, estetikk, tannhelse og skadeomfang mot alder beskrives samlet.</small><button type="button" class="prompt" data-template="assessment">Sett inn skrivestøtte</button></div>
+
+      <div class="group">
+        <div class="sublabel">Anamnese og etiologiske faktorer</div>
+        <div class="choices" id="anamnesisChips">
+          <label class="choice"><input type="checkbox" name="anamnesis" value="bruksisme / tanngnissing om natten"><span>bruksisme / tanngnissing om natten</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="tannpressing på dagtid"><span>tannpressing på dagtid</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="refluks / halsbrann"><span>refluks / halsbrann</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="hyppig inntak av sure drikker eller sitrus"><span>hyppig inntak av sure drikker eller sitrus</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="munntørrhet"><span>munntørrhet</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="oppkast eller brekninger i anamnesen"><span>oppkast eller brekninger i anamnesen</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="spiseforstyrrelse i anamnesen"><span>spiseforstyrrelse i anamnesen</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="har brukt bittskinne tidligere"><span>har brukt bittskinne tidligere</span></label>
+          <label class="choice"><input type="checkbox" name="anamnesis" value="ingen kjente etiologiske faktorer utover funn"><span>ingen kjente etiologiske faktorer utover funn</span></label>
+        </div>
       </div>
+
+      <div class="group">
+        <div class="sublabel">Kliniske funn · hurtigvalg</div>
+        <div class="choices">
+          <label class="choice"><input type="checkbox" name="finding" value="eksponert dentin"><span>eksponert dentin</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="cupping-lesjoner okklusalt"><span>cupping-lesjoner okklusalt</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="slitasjefasetter som korresponderer med antagonist"><span>slitasjefasetter som korresponderer med antagonist</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="glatte, glinsende emaljeflater"><span>glatte, glinsende emaljeflater</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="palatinale erosjoner i overkjevefronten"><span>palatinale erosjoner i overkjevefronten</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="chipping og frakturer av incisalkanter"><span>chipping og frakturer av incisalkanter</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="redusert kronehøyde"><span>redusert kronehøyde</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="fyllinger som står over omkringliggende tannsubstans"><span>fyllinger som står over omkringliggende tannsubstans</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="sprekkdannelser i emaljen"><span>sprekkdannelser i emaljen</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="redusert vertikal dimensjon"><span>redusert vertikal dimensjon</span></label>
+          <label class="choice"><input type="checkbox" name="finding" value="hypertrofisk tyggemuskulatur"><span>hypertrofisk tyggemuskulatur</span></label>
+        </div>
+        <div class="subgroup"><div class="sublabel">Symptomer</div>
+        <div class="choices">
+          <label class="choice"><input type="checkbox" name="symptom" value="ising / sensitivitet"><span>ising / sensitivitet</span></label>
+          <label class="choice"><input type="checkbox" name="symptom" value="smerter ved tygging"><span>smerter ved tygging</span></label>
+          <label class="choice"><input type="checkbox" name="symptom" value="ømhet i kjevemuskulatur"><span>ømhet i kjevemuskulatur</span></label>
+          <label class="choice"><input type="checkbox" name="symptom" value="pasienten opplever at tennene blir kortere"><span>pasienten opplever at tennene blir kortere</span></label>
+          <label class="choice"><input type="checkbox" name="symptom" value="pasienten plages av utseendet"><span>pasienten plages av utseendet</span></label>
+          <label class="choice"><input type="checkbox" name="symptom" value="ingen subjektive symptomer"><span>ingen subjektive symptomer</span></label>
+        </div></div>
+        <div class="field" style="margin-top:12px"><label for="findings">Øvrige funn · fritekst</label><textarea id="findings" placeholder="Utdyp funn, lokalisasjon og det som ikke dekkes av hurtigvalgene. TWI-funn hentes fra tannkartet."></textarea></div>
+      </div>
+
       <details class="twi-panel" id="twiPanel"><summary>Smith &amp; Knight · tannkart <span id="twiCount">Valgfritt</span></summary><div class="twi-body">
         <p class="helper">Velg en tann, eller bruk flervalg for flere tenner og flater samtidig.</p>
         <div class="selection-tools" data-selection-controls>
@@ -347,10 +425,41 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
         <div class="stats">
           <div class="stat"><b id="statAffected">0</b><span>affiserte flater</span></div>
           <div class="stat"><b id="statRecorded">0</b><span>registrerte flater</span></div>
-          <div class="stat"><b id="statSevere">0</b><span>flater score 3–4</span></div>
+          <div class="stat"><b id="statDentin">0</b><span>tenner med dentineksponering</span></div>
           <div class="stat"><b id="statMax">–</b><span>høyeste score</span></div>
         </div>
       </div></details>
+
+      <div class="group">
+        <div class="sublabel">Samlet vurdering · betydning for funksjon, estetikk og tannhelse</div>
+        <p class="hint" style="margin:0 0 10px">Rundskrivet krever at både funksjon og estetikk er vesentlig påvirket, at tannhelsen er vesentlig svekket, og at skadeomfanget vurderes mot alder.</p>
+        <div class="subgroup"><div class="sublabel">Funksjon</div><div class="choices">
+          <label class="choice"><input type="checkbox" name="fx" value="redusert tyggefunksjon"><span>redusert tyggefunksjon</span></label>
+          <label class="choice"><input type="checkbox" name="fx" value="sensitivitet ved kulde, varme eller syre"><span>sensitivitet ved kulde, varme eller syre</span></label>
+          <label class="choice"><input type="checkbox" name="fx" value="tap av vertikal dimensjon"><span>tap av vertikal dimensjon</span></label>
+          <label class="choice"><input type="checkbox" name="fx" value="gjentatte frakturer og chipping"><span>gjentatte frakturer og chipping</span></label>
+          <label class="choice"><input type="checkbox" name="fx" value="redusert incisal føring"><span>redusert incisal føring</span></label>
+          <label class="choice"><input type="checkbox" name="fx" value="dårlig holdbarhet for eksisterende restaureringer"><span>dårlig holdbarhet for eksisterende restaureringer</span></label>
+        </div></div>
+        <div class="subgroup"><div class="sublabel">Estetikk</div><div class="choices">
+          <label class="choice"><input type="checkbox" name="est" value="forkortede fortenner"><span>forkortede fortenner</span></label>
+          <label class="choice"><input type="checkbox" name="est" value="synlig dentin og gulnede flater"><span>synlig dentin og gulnede flater</span></label>
+          <label class="choice"><input type="checkbox" name="est" value="ujevn incisalkant"><span>ujevn incisalkant</span></label>
+          <label class="choice"><input type="checkbox" name="est" value="lite synlige overkjevefortenner ved smil"><span>lite synlige overkjevefortenner ved smil</span></label>
+          <label class="choice"><input type="checkbox" name="est" value="pasienten opplever tilstanden som estetisk belastende"><span>pasienten opplever tilstanden som estetisk belastende</span></label>
+        </div></div>
+        <div class="subgroup"><div class="sublabel">Tannhelse</div><div class="choices">
+          <label class="choice"><input type="checkbox" name="health" value="fare for pulpaeksponering"><span>fare for pulpaeksponering</span></label>
+          <label class="choice"><input type="checkbox" name="health" value="progredierende substanstap uten behandling"><span>progredierende substanstap uten behandling</span></label>
+          <label class="choice"><input type="checkbox" name="health" value="økt fraktur- og kariesrisiko"><span>økt fraktur- og kariesrisiko</span></label>
+          <label class="choice"><input type="checkbox" name="health" value="vesentlig svekket tannhelse"><span>vesentlig svekket tannhelse</span></label>
+        </div></div>
+        <div class="assess-grid">
+          <div class="field"><label for="ageRelation">Skadeomfang i forhold til alder <span class="req">*</span></label><select id="ageRelation"><option value="">Velg</option><option value="vesentlig større enn forventet for pasientens alder">Vesentlig større enn forventet for alderen</option><option value="større enn forventet for pasientens alder">Større enn forventet for alderen</option><option value="som forventet for pasientens alder">Som forventet for alderen</option></select></div>
+          <div class="field"><label for="severity">Samlet alvorlighet</label><select id="severity"><option value="">Velg</option><option value="alvorlig patologisk tap av tannsubstans">Alvorlig patologisk tap av tannsubstans</option><option value="moderat tap av tannsubstans">Moderat tap av tannsubstans</option><option value="begynnende tap av tannsubstans">Begynnende tap av tannsubstans</option></select></div>
+        </div>
+        <div class="field" style="margin-top:13px"><label for="assessment">Utdypende vurdering · fritekst</label><textarea id="assessment" placeholder="Utdyp der hurtigvalgene ikke er dekkende: hvordan funksjon, estetikk og tannhelse er påvirket, og hvorfor skadeomfanget er stort i forhold til alder."></textarea><button type="button" class="prompt" data-template="assessment">Sett inn skrivestøtte</button></div>
+      </div>
 
       <fieldset class="documentation group"><legend class="label">Basisdokumentasjon som foreligger</legend><div class="checks">
         <label class="check"><input type="checkbox" name="evidence" value="Kliniske foto">Kliniske foto</label>
@@ -366,22 +475,71 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
     <summary><span class="step">2</span><span><span class="sumtitle">Behandlingsplan</span><span class="sumsub">Velg tenner, materiale og felles tiltak</span></span></summary>
     <div class="body">
       <p class="lead">Velg tennene som inngår i planen. Trykk igjen for å fjerne en tann. Tannvalget her er uavhengig av TWI-registreringen.</p>
-      <div class="selection-tools"><button type="button" class="btn secondary" data-plan-select="upper">Hele overkjeven</button><button type="button" class="btn secondary" data-plan-select="lower">Hele underkjeven</button><button type="button" class="btn secondary" data-plan-select="all">Alle tenner</button><button type="button" class="btn secondary" data-plan-select="none">Fjern alle fra planen</button></div>
+      <div class="selection-tools"><button type="button" class="btn secondary" data-plan-select="upper">Hele overkjeven</button><button type="button" class="btn secondary" data-plan-select="lower">Hele underkjeven</button><button type="button" class="btn secondary" data-plan-select="front">Fronten 13–23 og 33–43</button><button type="button" class="btn secondary" data-plan-select="all">Alle tenner</button><button type="button" class="btn secondary" data-plan-select="none">Fjern alle fra planen</button></div>
       <div id="planChart"><div class="archblock upper"><div class="archlabel">Overkjeve</div><div id="planUpper" class="toothgrid"></div></div><div class="archblock lower"><div class="archlabel">Underkjeve</div><div id="planLower" class="toothgrid"></div></div></div>
       <p id="planSelection" class="note strong" aria-live="polite">Ingen tenner valgt i planen.</p>
       <fieldset class="documentation group"><legend class="label">Materialvalg · velg ett eller begge</legend><div class="checks">
         <label class="check"><input id="hasComposite" type="checkbox">Kompositt</label>
         <label class="check"><input id="hasCrown" type="checkbox">Kroner</label>
-      </div><p class="helper">Plastisk materiale er førstevalg.</p></fieldset>
-      <div id="crownBlock" class="case-special" hidden><div class="field"><label for="crownReason">Begrunnelse for kroner</label><textarea id="crownReason" placeholder="Angi hvilke tenner som skal ha kroner, hvorfor kompositt ikke er tilstrekkelig og hvorfor kroner gir vesentlig bedre funksjon enn annen behandling."></textarea><button type="button" class="prompt" data-template="crownReason">Sett inn skrivestøtte</button></div></div>
-      <div class="field group"><label for="plan">Samlet behandlingsplan · tiltak</label><textarea id="plan" placeholder="Beskriv felles tiltak og eventuelle forskjeller mellom tennene. Tannvalg og materialvalg legges automatisk til i plansammendraget under."></textarea><small>Ta med eventuell bittheving, støttekroner, Dahls prinsipp eller omvendt Dahls prinsipp, behandlingsrekkefølge og ønsket funksjon. Ved begge materialer: angi hvilke tenner som får henholdsvis kompositt og kroner.</small><button type="button" class="prompt" data-template="plan">Sett inn skrivestøtte</button></div>
+        <label class="check"><input id="crownLater" type="checkbox">Kroner kan vurderes på sikt</label>
+      </div><p class="helper">Plastisk materiale er førstevalg. Kroner er unntaket og må begrunnes særskilt.</p></fieldset>
+      <div id="crownBlock" class="case-special" hidden>
+        <div class="sublabel">Kroneterapi · begrunnelse for unntak fra kompositt</div>
+        <div class="choices">
+          <label class="choice"><input type="checkbox" name="crownBasis" value="rotfylt tann med svekket gjenværende tannsubstans"><span>rotfylt tann med svekket gjenværende tannsubstans</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="så lite gjenværende tannsubstans at kompositt ikke gir tilstrekkelig retensjon og styrke"><span>så lite gjenværende tannsubstans at kompositt ikke gir tilstrekkelig retensjon og styrke</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="gjentatte chippinger eller frakturer av komposittoppbygging"><span>gjentatte chippinger eller frakturer av komposittoppbygging</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="kompositt er forsøkt og har sviktet"><span>kompositt er forsøkt og har sviktet</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="store eksisterende restaureringer med sviktende kanter"><span>store eksisterende restaureringer med sviktende kanter</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="høy okklusal belastning ved bruksisme der kompositt ikke forventes å holde"><span>høy okklusal belastning ved bruksisme der kompositt ikke forventes å holde</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="behov for å gjenopprette okklusal støtte som kompositt ikke kan bære"><span>behov for å gjenopprette okklusal støtte som kompositt ikke kan bære</span></label>
+          <label class="choice"><input type="checkbox" name="crownBasis" value="vesentlig funksjonsforbedring sammenlignet med kompositt"><span>vesentlig funksjonsforbedring sammenlignet med kompositt</span></label>
+        </div>
+        <div class="grid2" style="margin-top:12px">
+          <div class="field"><label for="crownTeeth">Tenner som skal ha krone</label><input id="crownTeeth" type="text" autocomplete="off" placeholder="f.eks. 16, 26"></div>
+          <div class="field"><label for="crownReason">Utdypende begrunnelse · fritekst</label><textarea id="crownReason" placeholder="Hvorfor kompositt ikke er tilstrekkelig for disse tennene, og hvilken funksjonsgevinst kroner gir sammenlignet med alternativene."></textarea><button type="button" class="prompt" data-template="crownReason">Sett inn skrivestøtte</button></div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="sublabel">Tiltak · hurtigvalg</div>
+        <div class="measure-row">
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="measure" value="bittheving"><span>bittheving</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="Dahls prinsipp"><span>Dahls prinsipp</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="omvendt Dahls prinsipp"><span>omvendt Dahls prinsipp</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="støttekroner"><span>støttekroner</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="direkte komposittoppbygging"><span>direkte komposittoppbygging</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="etappevis behandling"><span>etappevis behandling</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="okklusjonskontroll og innsliping"><span>okklusjonskontroll og innsliping</span></label>
+            <label class="choice"><input type="checkbox" name="measure" value="bittskinne etter avsluttet behandling"><span>bittskinne etter avsluttet behandling</span></label>
+          </div>
+          <div class="field"><label for="biteRaise">Bittheving i mm</label><input id="biteRaise" type="number" min="0" max="10" step="0.5" inputmode="decimal" placeholder="f.eks. 2"></div>
+        </div>
+      </div>
+      <div class="field group"><label for="plan">Samlet behandlingsplan · fritekst</label><textarea id="plan" placeholder="Beskriv felles tiltak, behandlingsrekkefølge og eventuelle forskjeller mellom tennene. Tannvalg, materialvalg og hurtigvalg legges automatisk til i plansammendraget under."></textarea><small>Ved begge materialer: angi hvilke tenner som får henholdsvis kompositt og kroner. Beskriv ønsket funksjon og hvordan frisk tannsubstans bevares.</small><button type="button" class="prompt" data-template="plan">Sett inn skrivestøtte</button></div>
       <div id="planSummary" class="plan-summary group" aria-live="polite"></div>
       <div class="grid2 group">
-        <div class="field"><label for="activity">Sykdomsaktivitet</label><select id="activity"><option value="">Velg vurdering</option><option>Aktiv slitasje</option><option>Antatt stabil tilstand</option><option>Usikker aktivitet – vurderes ut fra dagens funn</option></select></div>
-        <div class="field"><label for="prognosis">Langtidsprognose og betydning for planen</label><textarea id="prognosis" placeholder="Forventet holdbarhet, risikofaktorer og hvordan dette påvirker valg av behandling og kontrollintervall."></textarea></div>
+        <div class="field"><label for="activity">Sykdomsaktivitet <span class="req">*</span></label><select id="activity"><option value="">Velg vurdering</option><option>Aktiv slitasje</option><option>Antatt stabil tilstand</option><option>Usikker aktivitet – vurderes ut fra dagens funn</option></select></div>
+        <div class="field"><label for="prognosis">Langtidsprognose og betydning for planen <span class="req">*</span></label><textarea id="prognosis" placeholder="Forventet holdbarhet, risikofaktorer og hvordan dette påvirker valg av behandling og kontrollintervall."></textarea><button type="button" class="prompt" data-template="prognosis">Sett inn skrivestøtte</button></div>
       </div>
       <details class="optional-fields group"><summary>Grunnlag for aktivitetsvurderingen · valgfritt</summary><div class="field"><label for="activityBasis">Dagens funn, anamnese eller tidligere dokumentasjon</label><textarea id="activityBasis" placeholder="Kan baseres på dagens kliniske funn og pasientens opplysninger. Tidligere foto er ikke en forutsetning."></textarea></div></details>
-      <div class="field group"><label for="followup">Forebygging og oppfølging</label><textarea id="followup" placeholder="Individuelle tiltak mot årsak og belastning, kontrollintervall og hva som skal følges opp."></textarea></div>
+      <div class="group">
+        <div class="sublabel">Forebygging og oppfølging · hurtigvalg</div>
+        <div class="measure-row">
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="prevention" value="bittskinne (nattskinne)"><span>bittskinne (nattskinne)</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="kostholdsveiledning mot syreeksponering"><span>kostholdsveiledning mot syreeksponering</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="høyfluor tannkrem"><span>høyfluor tannkrem</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="fluorlakk"><span>fluorlakk</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="henvisning til fastlege for utredning av refluks"><span>henvisning til fastlege for utredning av refluks</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="tiltak mot munntørrhet"><span>tiltak mot munntørrhet</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="instruksjon i skånsom pussing"><span>instruksjon i skånsom pussing</span></label>
+            <label class="choice"><input type="checkbox" name="prevention" value="ny fotodokumentasjon ved kontroll"><span>ny fotodokumentasjon ved kontroll</span></label>
+          </div>
+          <div class="field"><label for="recall">Kontrollintervall</label><select id="recall"><option value="">Velg</option><option value="3 måneder">3 måneder</option><option value="6 måneder">6 måneder</option><option value="12 måneder">12 måneder</option></select></div>
+        </div>
+        <div class="field" style="margin-top:13px"><label for="followup">Forebygging og oppfølging · fritekst</label><textarea id="followup" placeholder="Individuelle tiltak mot årsak og belastning, og hva som skal følges opp ved kontroll."></textarea></div>
+      </div>
       <details class="optional-fields group"><summary>Andre behandlingssituasjoner</summary><div class="checks group">
         <label class="check"><input id="hasReplacement" type="checkbox">Erstatning av tapt tann</label>
         <label class="check"><input id="hasProstheticWear" type="checkbox">Slitasje av protetisk materiale</label>
@@ -392,21 +550,42 @@ select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #7cb
   <details class="card" id="journalSection" open>
     <summary><span class="step">3</span><span><span class="sumtitle">Journaltekst</span><span class="sumsub">Automatisk journaltekst og utskriftsrapport</span></span></summary>
     <div class="body">
-      <p class="lead">Teksten bygger på det du har registrert. Tomme felt utelates. Tilpass eventuell skrivestøtte før du kopierer eller skriver ut.</p>
-      <textarea id="journal" class="journal" readonly aria-label="Generert journaltekst"></textarea>
-      <div class="actions">
-        <span id="copyFlash" class="flash" role="status"></span>
-        <button id="resetBtn" class="btn secondary" type="button">Nullstill</button>
-        <button id="downloadBtn" class="btn secondary" type="button">Last ned tekst</button>
-        <button id="reportPreviewBtn" class="btn secondary" type="button" aria-expanded="false" aria-controls="reportPreview">Vis rapport</button>
-        <button id="printBtn" class="btn secondary" type="button">Skriv ut</button>
-        <button id="copyBtn" class="btn" type="button">Kopier journaltekst</button>
+      <p class="lead">Teksten bygger på det du har registrert. Tomme felt utelates. Du kan redigere teksten direkte i feltet før du kopierer eller skriver ut.</p>
+      <div class="journal-layout">
+        <div>
+          <div class="format-row" data-format-controls>
+            <span class="label">Format</span>
+            <div class="choices" role="radiogroup" aria-label="Format på journaltekst">
+              <label class="choice"><input type="radio" name="format" value="headings" checked><span>Med overskrifter</span></label>
+              <label class="choice"><input type="radio" name="format" value="compact"><span>Kompakt</span></label>
+            </div>
+            <label class="check"><input type="checkbox" id="includeHeader" checked>Ta med topptekst (dato, pasientnummer, behandler)</label>
+          </div>
+          <textarea id="journal" class="journal" aria-label="Journaltekst, kan redigeres" spellcheck="true"></textarea>
+          <div id="journalState" class="edit-state" hidden><span>Manuelt redigert. Endringer i skjemaet oppdaterer ikke teksten før du henter den på nytt.</span><button type="button" id="regenBtn" class="btn secondary">Generer på nytt fra skjemaet</button></div>
+          <div class="actions">
+            <span id="copyFlash" class="flash" role="status"></span>
+            <button id="resetBtn" class="btn secondary" type="button">Nullstill</button>
+            <button id="downloadBtn" class="btn secondary" type="button">Last ned tekst</button>
+            <button id="reportPreviewBtn" class="btn secondary" type="button" aria-expanded="false" aria-controls="reportPreview">Vis rapport</button>
+            <button id="printBtn" class="btn secondary" type="button">Skriv ut</button>
+            <button id="copyBtn" class="btn" type="button">Kopier journaltekst</button>
+          </div>
+        </div>
+        <aside class="journal-side" aria-label="Dokumentasjonssjekk">
+          <h3>Dokumentasjonssjekk</h3>
+          <p class="hint">Viser om punktene rundskrivet spør etter er fylt ut. Ikke en vurdering av stønadsrett.</p>
+          <div class="check-progress"><div class="bar"><i id="checkBar" style="width:0%"></i></div><b id="checkCount">0/0</b></div>
+          <ul class="checklist" id="docCheck"></ul>
+        </aside>
       </div>
       <div id="reportPreview" class="report-preview" hidden></div>
     </div>
   </details>
 
   <div class="footer">Ingen automatisk lagring eller innsending. Kopier før du lukker. Behandler vurderer dokumentasjon og stønadsrett.</div>
+
+  <div class="sticky-status" role="status"><div class="status-text"><b>Dokumentasjonssjekk</b><span id="stickyCheck">0 av 0 punkter fylt ut</span></div><button type="button" class="btn secondary" id="stickyGoto">Gå til journaltekst</button><button type="button" class="btn" id="stickyCopy">Kopier journaltekst</button></div>
 </main>
 
 <div id="printReport"></div>
@@ -418,6 +597,7 @@ const $=id=>document.getElementById(id);
 const UPPER=['18','17','16','15','14','13','12','11','21','22','23','24','25','26','27','28'];
 const LOWER=['48','47','46','45','44','43','42','41','31','32','33','34','35','36','37','38'];
 const ALL=[...UPPER,...LOWER];
+const FRONT=['13','12','11','21','22','23','33','32','31','41','42','43'];
 const SURFACES=[['b','Bukkal'],['o','Okklusal / incisal'],['l','Lingual / palatinal'],['c','Cervikal']];
 const blankTooth=()=>({missing:false,b:null,o:null,l:null,c:null});
 const teeth=Object.fromEntries(ALL.map(id=>[id,blankTooth()]));
@@ -425,11 +605,14 @@ const text=id=>($(id)?.value||'').trim();
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dateNO=v=>v?v.split('-').reverse().join('.'):'';
 const sentence=s=>s&&!/[.!?]$/.test(s)?s+'.':s;
+const capital=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+const checked=name=>[...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el=>el.value);
+const listed=items=>items.length===1?items[0]:items.some(i=>i.includes(','))?items.join('; '):items.slice(0,-1).join(', ')+' og '+items[items.length-1];
 const surfaceName=(id,key)=>key==='o'?(Number(id[1])<=3?'Incisal':'Okklusal'):SURFACES.find(([k])=>k===key)[1];
 const selectedTeeth=new Set();
 const planTeeth=new Set();
 let batchUndo=null;
-let selected='16',flashTimer,resetTimer,resetArmed=false,dirty=false;
+let selected='16',flashTimer,resetTimer,resetArmed=false,dirty=false,journalEdited=false;
 
 function toothArt(id){
   const n=Number(id[1]),kind=n<=2?'incisor':n===3?'canine':n<=5?'premolar':'molar';
@@ -520,10 +703,12 @@ function undoBatch(){
   renderOdontogram();recompute();$('batchFlash').textContent='Siste endring er angret. Tidligere score er gjenopprettet.';
 }
 function stats(){
-  let affected=0,severe=0,total=0,max=null;const missing=[];
+  let affected=0,severe=0,total=0,max=null,recordedTeeth=0,dentinTeeth=0;const missing=[];
   ALL.forEach(id=>{const t=teeth[id];if(t.missing){missing.push(id);return;}
-    SURFACES.forEach(([key])=>{const v=t[key];if(v===null)return;total++;if(v>0)affected++;if(v>=3)severe++;max=max===null?v:Math.max(max,v);});
-  });return {affected,severe,total,max,missing};
+    let any=false,dentin=false;
+    SURFACES.forEach(([key])=>{const v=t[key];if(v===null)return;any=true;total++;if(v>0)affected++;if(v>=2)dentin=true;if(v>=3)severe++;max=max===null?v:Math.max(max,v);});
+    if(any)recordedTeeth++;if(dentin)dentinTeeth++;
+  });return {affected,severe,total,max,missing,recordedTeeth,dentinTeeth};
 }
 function planTargets(){return ALL.filter(id=>planTeeth.has(id));}
 function materials(){return [$('hasComposite').checked?'kompositt':'',$('hasCrown').checked?'kroner':''].filter(Boolean);}
@@ -538,11 +723,30 @@ function renderPlanChart(){
   document.querySelectorAll('[data-plan-tooth]').forEach(button=>{const id=button.dataset.planTooth,chosen=planTeeth.has(id);button.classList.toggle('selected',chosen);button.classList.toggle('missing',teeth[id].missing);button.setAttribute('aria-pressed',String(chosen));button.querySelector('small').textContent=teeth[id].missing?'Mangler':chosen?'I planen':'';});
   const ids=planTargets();$('planSelection').textContent=ids.length?'Tenner i planen ('+ids.length+'): '+ids.join(', '):'Ingen tenner valgt i planen.';
 }
+function measureText(){
+  const items=checked('measure'),mm=text('biteRaise');
+  return items.map(item=>item==='bittheving'&&mm?'bittheving '+mm.replace('.',',')+' mm':item);
+}
 function planText(){
-  const ids=planTargets(),mats=materials(),parts=[];
+  const ids=planTargets(),mats=materials(),measures=measureText(),parts=[];
   if(ids.length)parts.push('Planlagte tenner: '+ids.join(', ')+'.');
-  if(mats.length)parts.push('Materialvalg: '+mats.join(' og ')+'.');
+  if(mats.length)parts.push('Materialvalg: '+mats.join(' og ')+'. Vevsbesparende behandling med plastisk materiale som førstevalg.');
+  if(measures.length)parts.push('Tiltak: '+listed(measures)+'.');
   if(text('plan'))parts.push(sentence(text('plan')));
+  return parts.join('\n');
+}
+function crownActive(){return $('hasCrown').checked||$('crownLater').checked;}
+function crownText(){
+  const reasons=checked('crownBasis'),parts=[];
+  if($('hasCrown').checked){
+    parts.push('Kroner planlegges'+(text('crownTeeth')?' på '+text('crownTeeth'):'')+'.');
+    if(reasons.length)parts.push('Kompositt som førstevalg er vurdert, men kroner er indisert på grunn av '+listed(reasons)+'.');
+  }
+  if($('crownLater').checked){
+    parts.push('Kroneterapi kan vurderes på sikt'+($('hasCrown').checked?' for øvrige tenner':'')+' dersom komposittoppbyggingene viser gjentatte chippinger eller frakturer.');
+    if(reasons.length&&!$('hasCrown').checked)parts.push('Forhold som kan tilsi kroneterapi på sikt: '+listed(reasons)+'.');
+  }
+  if(text('crownReason'))parts.push(sentence(text('crownReason')));
   return parts.join('\n');
 }
 function specialActive(){return $('hasReplacement').checked||$('hasProstheticWear').checked||text('cause')==='Patologisk slitasje av protetisk materiale';}
@@ -555,19 +759,38 @@ function twiGroups(){
   }
   return [...groups].map(([scores,ids])=>ids.join(', ')+': '+scores+'.').join('\n');
 }
+function twiText(st){
+  if(!st.total)return '';
+  const summary='TWI registrert på '+st.recordedTeeth+(st.recordedTeeth===1?' tann':' tenner')+' ('+st.total+' flater). Høyeste score '+st.max+'. '+(st.dentinTeeth?st.dentinTeeth+(st.dentinTeeth===1?' tann':' tenner')+' med dentineksponering (score 2–4).':'Ingen tenner med dentineksponering.');
+  return summary+'\n'+twiGroups();
+}
+function assessmentText(){
+  const fx=checked('fx'),est=checked('est'),health=checked('health'),parts=[];
+  if(fx.length)parts.push('Funksjon: '+listed(fx)+'.');
+  if(est.length)parts.push('Estetikk: '+listed(est)+'.');
+  if(health.length)parts.push('Tannhelse: '+listed(health)+'.');
+  if(text('ageRelation'))parts.push('Skadeomfanget vurderes som '+text('ageRelation')+(text('age')?' ('+text('age')+' år)':'')+'.');
+  if(text('severity'))parts.push('Samlet vurderes tilstanden som '+text('severity')+(fx.length&&est.length?' som påvirker både funksjon og estetikk':'')+'.');
+  if(text('assessment'))parts.push(sentence(text('assessment')));
+  return parts.join('\n');
+}
 function reportSections(st){
   const sections=[];
   const add=(heading,content)=>{if(content)sections.push({heading,content});};
-  add('Kliniske funn',[text('cause')?'Vurdert årsak: '+sentence(text('cause')):'',sentence(text('findings'))].filter(Boolean).join('\n'));
-  add('TWI – Smith & Knight',twiGroups());
+  const anamnesis=checked('anamnesis');
+  add('Anamnese og etiologi',[text('cause')?'Vurdert årsak: '+sentence(text('cause')):'',anamnesis.length?'Anamnese: '+listed(anamnesis)+'.':''].filter(Boolean).join('\n'));
+  const findings=checked('finding'),symptoms=checked('symptom');
+  add('Kliniske funn',[findings.length?capital(listed(findings))+'.':'',symptoms.length?'Symptomer: '+listed(symptoms)+'.':'',sentence(text('findings'))].filter(Boolean).join('\n'));
+  add('TWI – Smith & Knight',twiText(st));
   add('Manglende tenner',st.missing.length?st.missing.join(', ')+'.':'');
-  add('Samlet klinisk vurdering',sentence(text('assessment')));
+  add('Samlet klinisk vurdering',assessmentText());
   const evidence=evidenceItems();
   add('Dokumentasjon',[evidence.length?'Foreliggende dokumentasjon: '+evidence.join(', ')+'.':'',$('documentedBefore').checked?'Alvorlighet og skadeomfang vurdert mot alder er dokumentert før behandlingsstart.':''].filter(Boolean).join('\n'));
   add('Samlet behandlingsplan',planText());
-  if($('hasCrown').checked)add('Begrunnelse for kroner',sentence(text('crownReason')));
+  if(crownActive())add('Kroneterapi',crownText());
   add('Aktivitet og langtidsprognose',[text('activity')?'Sykdomsaktivitet: '+sentence(text('activity')):'',text('activityBasis')?'Vurderingsgrunnlag: '+sentence(text('activityBasis')):'',text('prognosis')?'Langtidsprognose og betydning for planen: '+sentence(text('prognosis')):''].filter(Boolean).join('\n'));
-  add('Forebygging og oppfølging',sentence(text('followup')));
+  const prevention=checked('prevention');
+  add('Forebygging og oppfølging',[prevention.length?'Forebyggende tiltak: '+listed(prevention)+'.':'',text('recall')?'Kontroll om '+text('recall')+'.':'',sentence(text('followup'))].filter(Boolean).join('\n'));
   if(specialActive()){
     const kinds=[$('hasReplacement').checked?'Erstatning av tapt tann':'',($('hasProstheticWear').checked||text('cause')==='Patologisk slitasje av protetisk materiale')?'Slitasje av protetisk materiale':''].filter(Boolean);
     add('Andre behandlingssituasjoner',kinds.join('. ')+'.'+(text('specialReason')?'\n'+sentence(text('specialReason')):''));
@@ -575,30 +798,61 @@ function reportSections(st){
   return sections;
 }
 function metadata(){return [text('examDate')?'Undersøkelsesdato: '+dateNO(text('examDate')):'',text('patientRef')?'Pasientnummer: '+text('patientRef'):'',text('age')?'Alder: '+text('age')+' år':'',text('clinician')?'Behandler: '+text('clinician'):''].filter(Boolean);}
+function journalFormat(){return document.querySelector('input[name="format"]:checked')?.value||'headings';}
 function buildJournal(sections){
-  return ['ATTRISJON / EROSJON – INNSLAGSPUNKT 9',metadata().join(' · '),...sections.map(({heading,content})=>heading.toUpperCase()+'\n'+content)].filter(Boolean).join('\n\n');
+  const header=$('includeHeader').checked?['ATTRISJON / EROSJON – INNSLAGSPUNKT 9',metadata().join(' · ')]:[];
+  if(journalFormat()==='compact'){
+    return [...header,...sections.map(({heading,content})=>heading+': '+content.replace(/\n/g,' '))].filter(Boolean).join('\n');
+  }
+  return [...header,...sections.map(({heading,content})=>heading.toUpperCase()+'\n'+content)].filter(Boolean).join('\n\n');
+}
+function buildEditedReport(){
+  return '<article class="report"><header><p class="report-kicker">Innslagspunkt 9 · klinisk dokumentasjon</p><h1>Attrisjon og erosjon</h1><div class="report-meta">'+metadata().map(m=>'<span>'+esc(m)+'</span>').join('')+'</div></header><section><p>'+esc($('journal').value).replace(/\n/g,'<br>')+'</p></section></article>';
 }
 function buildReport(sections){
   return '<article class="report"><header><p class="report-kicker">Innslagspunkt 9 · klinisk dokumentasjon</p><h1>Attrisjon og erosjon</h1><div class="report-meta">'+metadata().map(m=>'<span>'+esc(m)+'</span>').join('')+'</div></header>'+sections.map(({heading,content})=>'<section><h2>'+esc(heading)+'</h2><p>'+esc(content).replace(/\n/g,'<br>')+'</p></section>').join('')+'</article>';
 }
+function checklist(st){
+  const items=[
+    {label:'Alder angitt',ok:!!text('age'),target:'age'},
+    {label:'Årsak vurdert',ok:!!text('cause'),target:'cause'},
+    {label:'Kliniske funn beskrevet',ok:checked('finding').length>0||!!text('findings')||st.total>0,target:'findings'},
+    {label:'Funksjon og estetikk vurdert',ok:(checked('fx').length>0&&checked('est').length>0)||!!text('assessment'),target:'assessment'},
+    {label:'Skadeomfang vurdert mot alder',ok:!!text('ageRelation'),target:'ageRelation'},
+    {label:'Dokumentasjon foreligger før behandlingsstart',ok:evidenceItems().length>0&&$('documentedBefore').checked,target:'documentedBefore'},
+    {label:'Behandlingsplan med tenner og materiale',ok:planTeeth.size>0&&materials().length>0,target:'planChart'},
+    {label:'Sykdomsaktivitet og langtidsprognose',ok:!!text('activity')&&!!text('prognosis'),target:'activity'},
+    {label:'Forebygging og oppfølging',ok:checked('prevention').length>0||!!text('recall')||!!text('followup'),target:'followup'}
+  ];
+  if(crownActive())items.splice(7,0,{label:$('hasCrown').checked?'Begrunnelse for kroner':'Grunnlag for kroner på sikt',ok:checked('crownBasis').length>0||!!text('crownReason'),target:'crownBlock'});
+  return items;
+}
+function renderChecklist(st){
+  const items=checklist(st),done=items.filter(i=>i.ok).length;
+  $('docCheck').innerHTML=items.map(i=>`<li class="${i.ok?'ok':''}"><span class="mark" aria-hidden="true">${i.ok?'✓':''}</span><button type="button" data-goto="${i.target}">${esc(i.label)}</button></li>`).join('');
+  $('checkCount').textContent=done+'/'+items.length;$('checkBar').style.width=Math.round(done/items.length*100)+'%';
+  $('stickyCheck').textContent=done+' av '+items.length+' punkter fylt ut';
+}
 function recompute(){
   const st=stats();
-  $('statAffected').textContent=st.affected;$('statRecorded').textContent=st.total;$('statSevere').textContent=st.severe;$('statMax').textContent=st.max??'–';
+  $('statAffected').textContent=st.affected;$('statRecorded').textContent=st.total;$('statDentin').textContent=st.dentinTeeth;$('statMax').textContent=st.max??'–';
   $('twiCount').textContent=st.total?st.total+' flater registrert':'Valgfritt';
-  $('crownBlock').hidden=!$('hasCrown').checked;$('specialBlock').hidden=!specialActive();
+  $('crownBlock').hidden=!crownActive();$('specialBlock').hidden=!specialActive();
   const hints=[];
   if($('hasReplacement').checked)hints.push('Ved protetisk erstatning under punkt 9: dokumenter rotfraktur som følge av attrisjon for den tapte tannen.');
   if($('hasProstheticWear').checked||text('cause')==='Patologisk slitasje av protetisk materiale')hints.push('Beskriv tilsvarende alvorlig patologisk slitasje av det protetiske materialet.');
   $('specialHints').innerHTML=hints.map(h=>'<p>'+esc(h)+'</p>').join('');
   renderPlanChart();
   $('planSummary').innerHTML='<strong>Samlet plan · oppdateres automatisk</strong><p>'+esc(planText()||'Velg tenner og materiale, og beskriv tiltakene over.').replace(/\n/g,'<br>')+'</p>';
-  const sections=reportSections(st);$('journal').value=buildJournal(sections);
-  const report=buildReport(sections);$('printReport').innerHTML=report;$('reportPreview').innerHTML=report;
+  const sections=reportSections(st);if(!journalEdited)$('journal').value=buildJournal(sections);
+  const report=journalEdited?buildEditedReport():buildReport(sections);$('printReport').innerHTML=report;$('reportPreview').innerHTML=report;
+  renderChecklist(st);
 }
 const templates={
-  assessment:'Slitasjen medfører [konkret funksjonstap og kliniske funn]. Estetisk foreligger [observerte endringer og betydning for pasienten]. Tannhelsen er påvirket ved [symptomer, strukturell svekkelse og øvrige konsekvenser]. Sammenholdt med pasientens alder vurderes skadeomfanget som [vurdering med begrunnelse]. Samlet vurderes alvorlighetsgraden som [klinisk vurdering knyttet til funksjon, estetikk og tannhelse].',
-  plan:'Planlagte tiltak: [oppbygning/restaurering og mål for funksjon og estetikk]. Fordeling mellom tenner/materialer: [angi ved behov]. Bittforhold: [eventuell bittheving i mm, lokalisasjon og begrunnelse; eventuelle støttekroner, Dahls prinsipp eller omvendt Dahls prinsipp]. Gjennomføring: [behandlingsrekkefølge, eventuell etappevis behandling og kontroll av okklusjon]. Vevsbesparende hensyn: [hvordan frisk tannsubstans bevares].',
-  crownReason:'Kroner planlegges på [aktuelle tenner]. Det foreligger [konkrete funn og gjenværende tannsubstans]. Kompositt/plastisk materiale er vurdert, men anses utilstrekkelig fordi [individuell begrunnelse]. Sammenlignet med [aktuell alternativ behandling] forventes kroner å gi vesentlig funksjonsforbedring ved [konkret funksjonsgevinst og begrunnelse]. Vevsbesparende hensyn og langtidsprognose: [vurdering].'
+  assessment:'Slitasjen medfører [konkret funksjonstap og kliniske funn]. Estetisk foreligger [observerte endringer og betydning for pasienten]. Tannhelsen er påvirket ved [symptomer, strukturell svekkelse og øvrige konsekvenser]. Sammenholdt med pasientens alder vurderes skadeomfanget som [vurdering med begrunnelse].',
+  plan:'Planlagte tiltak: [oppbygning/restaurering og mål for funksjon og estetikk]. Fordeling mellom tenner/materialer: [angi ved behov]. Bittforhold: [eventuell bittheving i mm, lokalisasjon og begrunnelse]. Gjennomføring: [behandlingsrekkefølge, eventuell etappevis behandling og kontroll av okklusjon]. Vevsbesparende hensyn: [hvordan frisk tannsubstans bevares].',
+  crownReason:'Kroner planlegges på [aktuelle tenner]. Det foreligger [konkrete funn og gjenværende tannsubstans]. Kompositt/plastisk materiale er vurdert, men anses utilstrekkelig fordi [individuell begrunnelse]. Sammenlignet med [aktuell alternativ behandling] forventes kroner å gi vesentlig funksjonsforbedring ved [konkret funksjonsgevinst og begrunnelse]. Vevsbesparende hensyn og langtidsprognose: [vurdering].',
+  prognosis:'Uten behandling forventes [videre substanstap / økt frakturrisiko / symptomutvikling]. Med planlagt behandling vurderes prognosen som [god/usikker] forutsatt [kontroll av etiologiske faktorer, bittskinne, kostholdsendring]. Dette tilsier [valg av materiale og kontrollintervall].'
 };
 document.querySelectorAll('[data-template]').forEach(button=>button.addEventListener('click',()=>{
   const id=button.dataset.template,field=$(id),template=templates[id];
@@ -607,17 +861,17 @@ document.querySelectorAll('[data-template]').forEach(button=>button.addEventList
 }));
 document.querySelectorAll('[data-plan-select]').forEach(button=>button.addEventListener('click',()=>{
   const group=button.dataset.planSelect;planTeeth.clear();
-  (group==='upper'?UPPER:group==='lower'?LOWER:group==='all'?ALL:[]).forEach(id=>{if(!teeth[id].missing)planTeeth.add(id);});markChanged();recompute();
+  (group==='upper'?UPPER:group==='lower'?LOWER:group==='front'?FRONT:group==='all'?ALL:[]).forEach(id=>{if(!teeth[id].missing)planTeeth.add(id);});markChanged();recompute();
 }));
 $('reportPreviewBtn').addEventListener('click',()=>{const show=$('reportPreview').hidden;$('reportPreview').hidden=!show;$('reportPreviewBtn').setAttribute('aria-expanded',String(show));$('reportPreviewBtn').textContent=show?'Skjul rapport':'Vis rapport';});
 function today(){const d=new Date(),pad=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
 function markChanged(){batchUndo=null;$('undoBatch').disabled=true;$('batchFlash').textContent='';dirty=true;$('copyFlash').textContent='';}
 function goTo(id){const el=$(id);if(!el)return;let parent=el;while(parent){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement;}el.scrollIntoView({behavior:'smooth',block:el.tagName==='DETAILS'?'start':'center'});if(el.matches('input,textarea,select,button'))el.focus({preventScroll:true});}
 function resetAll(){
-  document.querySelectorAll('input,textarea,select').forEach(el=>{if(el.type==='checkbox'||el.type==='radio')el.checked=false;else el.value='';});
+  document.querySelectorAll('input,textarea,select').forEach(el=>{if(el.closest('[data-format-controls]'))return;if(el.type==='checkbox'||el.type==='radio')el.checked=false;else el.value='';});
   ALL.forEach(id=>Object.assign(teeth[id],blankTooth()));
   selectedTeeth.clear();planTeeth.clear();$('reportPreview').hidden=true;$('reportPreviewBtn').textContent='Vis rapport';$('reportPreviewBtn').setAttribute('aria-expanded','false');batchUndo=null;$('batchFlash').textContent='';
-  selected='16';$('twiPanel').open=false;$('examDate').value=today();dirty=false;resetArmed=false;
+  selected='16';$('twiPanel').open=false;$('examDate').value=today();dirty=false;resetArmed=false;journalEdited=false;updateJournalState();
   clearTimeout(resetTimer);clearTimeout(flashTimer);$('resetBtn').textContent='Nullstill';$('copyFlash').textContent='Skjemaet er nullstilt.';
   renderOdontogram();recompute();window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -625,11 +879,12 @@ async function copyJournal(){
   recompute();const content=$('journal').value;
   try{if(!navigator.clipboard?.writeText)throw Error('Clipboard unavailable');await navigator.clipboard.writeText(content);$('copyFlash').textContent='Journaltekst kopiert.';}
   catch{$('journal').focus();$('journal').select();let ok=false;try{ok=document.execCommand('copy');}catch{}$('copyFlash').textContent=ok?'Journalutkast kopiert.':'Teksten er markert. Bruk Kopier på enheten din.';}
-  clearTimeout(flashTimer);flashTimer=setTimeout(()=>$('copyFlash').textContent='',6000);
+  $('stickyCopy').textContent=$('copyFlash').textContent.startsWith('Journal')?'Kopiert ✓':'Kopier journaltekst';
+  clearTimeout(flashTimer);flashTimer=setTimeout(()=>{$('copyFlash').textContent='';$('stickyCopy').textContent='Kopier journaltekst';},6000);
 }
 document.addEventListener('input',event=>{
   const el=event.target;if(el.closest('[data-selection-controls]'))return;if(!el.matches('input,textarea,select')||el.id==='journal')return;
-  markChanged();recompute();
+  if(!el.closest('[data-format-controls]'))markChanged();recompute();
 });
 document.addEventListener('change',event=>{if(event.target.closest('[data-selection-controls]'))return;if(event.target.matches('input,textarea,select')&&event.target.id!=='journal')recompute();});
 $('multiMode').addEventListener('change',()=>{selectedTeeth.clear();renderOdontogram();});
@@ -645,8 +900,13 @@ $('clearBatchSurfaces').addEventListener('click',clearBatchSurfaces);$('clearBat
 $('applyBatch').addEventListener('click',applyBatch);$('undoBatch').addEventListener('click',undoBatch);
 $('missingBtn').addEventListener('click',()=>{teeth[selected].missing=!teeth[selected].missing;markChanged();renderOdontogram();recompute();});
 document.querySelector('.rulebar').addEventListener('click',event=>{const link=event.target.closest('a');if(link){event.preventDefault();goTo(link.getAttribute('href').slice(1));}});
-$('copyBtn').addEventListener('click',copyJournal);
-$('downloadBtn').addEventListener('click',()=>{recompute();const url=URL.createObjectURL(new Blob(['\uFEFF'+$('journal').value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='journalutkast-innslagspunkt-9-'+(text('examDate')||'udatert')+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('copyFlash').textContent='Tekstfil laget. Oppbevar den i godkjent pasientjournal.';});
+$('docCheck').addEventListener('click',event=>{const button=event.target.closest('[data-goto]');if(button)goTo(button.dataset.goto);});
+$('copyBtn').addEventListener('click',copyJournal);$('stickyCopy').addEventListener('click',copyJournal);
+function updateJournalState(){$('journalState').hidden=!journalEdited;}
+$('journal').addEventListener('input',()=>{if(!journalEdited){journalEdited=true;updateJournalState();}dirty=true;$('copyFlash').textContent='';recompute();});
+$('regenBtn').addEventListener('click',()=>{journalEdited=false;updateJournalState();recompute();$('copyFlash').textContent='Journalteksten er generert på nytt fra skjemaet.';clearTimeout(flashTimer);flashTimer=setTimeout(()=>$('copyFlash').textContent='',6000);});
+$('stickyGoto').addEventListener('click',()=>goTo('journalSection'));
+$('downloadBtn').addEventListener('click',()=>{recompute();const url=URL.createObjectURL(new Blob(['﻿'+$('journal').value],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='journalutkast-innslagspunkt-9-'+(text('examDate')||'udatert')+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('copyFlash').textContent='Tekstfil laget. Oppbevar den i godkjent pasientjournal.';});
 $('resetBtn').addEventListener('click',()=>{if(!dirty||resetArmed){resetAll();return;}resetArmed=true;$('resetBtn').textContent='Bekreft nullstilling';$('copyFlash').textContent='Dette sletter utfyllingen. Trykk en gang til innen 8 sekunder.';resetTimer=setTimeout(()=>{resetArmed=false;$('resetBtn').textContent='Nullstill';$('copyFlash').textContent='';},8000);});
 $('printBtn').addEventListener('click',()=>{recompute();window.print();});window.addEventListener('beforeprint',recompute);
 window.addEventListener('beforeunload',event=>{if(dirty){event.preventDefault();event.returnValue='';}});
